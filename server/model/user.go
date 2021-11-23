@@ -20,7 +20,7 @@ type User struct {
 	Name      string `json:"name"`
 	Pwd       string `json:"password"`
 	Phone     int64  `gorm:"DEFAULT:0"`
-	Email     string `gorm:"type:varchar(20);unique_index;"`
+	Email     string `gorm:"type:varchar(255);unique_index;"`
 	CreatedAt *time.Time
 	UpdateTAt *time.Time
 }
@@ -70,8 +70,12 @@ func (user *User) Putup() error {
 
 // 查詢數據
 func (user *User) Getup() error {
-	fmt.Println("Get data: {}", user)
-	return DB.Model(&user).Where("name = ?", user.Name).Error
+	//fmt.Println("Get data: {}", user)
+	//DB.Where("name = ?", "Jack").Find(&user)
+
+	//return DB.Model(&user).Where("name = ?", user.Name).Error
+	//return DB.Find(&user).Error
+	return DB.Where("name = ?", user.Name).Find(&user).Error
 }
 
 // 用戶註冊
@@ -149,16 +153,22 @@ func Update(username string, pwd string, update_t_at *time.Time) error {
 	return updateerr
 }
 
-func GetAll(id int32, username string, pwd string, email string) error {
+func GetAll(id int32, username string, pwd string, email string) (error, User) {
 	user := User{
 		Id:    id,
 		Name:  username,
 		Pwd:   pwd,
 		Email: email,
 	}
-	DB.Where("name = ?", "Huang").Find(&user)
-	fmt.Println("Huang's Detail: {}", user)
+
+	//result := DB.Find(&user)
+	//resint := result.RowsAffected
+	//fmt.Println("Huang's Detail: {}", resint)
+	//DB.Find(&user).Where("name", "Jack")
+
+	//DB.Where("name = ?", "Huang").Find(&user)
 	geterr := user.Getup()
+	fmt.Println("User Id: {}", user.Id)
 	//fmt.Printf("Geterr:%+v\n", geterr)
-	return geterr
+	return geterr, user
 }

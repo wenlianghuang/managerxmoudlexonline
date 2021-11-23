@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios'
-import {useHistory,useLocation,Link} from 'react-router-dom'
+import {useHistory,useLocation,Link,Redirect} from 'react-router-dom'
 import AlertTitle from '@mui/material/AlertTitle';
 import Alert from '@mui/material/Alert';
 function Copyright(props) {
@@ -29,8 +29,9 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+//const theme = createTheme();
 export default function Homepage({setToken}){
+  const theme = createTheme();
   const history = useHistory()
   const location = useLocation()
   let { from } = location.state || { from: { pathname: "/dashboard",state: {reload: true} } };
@@ -142,8 +143,8 @@ export default function Homepage({setToken}){
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
+                  <Link to="/changepw" variant="body2">
+                    {"Forget Password?"}
                   </Link>
                 </Grid>
                 <Grid item>
@@ -217,12 +218,12 @@ export default function Homepage({setToken}){
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link to="/changepw" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link to="/signup" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

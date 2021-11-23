@@ -37,7 +37,7 @@ func main() {
 	}
 	//Get
 	{
-		v1.GET("/register", controller.GetSomeOrigin)
+		v1.GET("/allacc", controller.GetSomeOrigin)
 	}
 	// secure v1
 	sv1 := router.Group("/apis/v1/auth/")

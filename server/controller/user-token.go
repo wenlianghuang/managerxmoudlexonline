@@ -198,18 +198,22 @@ type GetTemp struct {
 }
 
 func GetSomeOrigin(c *gin.Context) {
-	var getres model.GetReq
+
+	//var getres model.GetReq
+	var getres model.User
 	//bindErr := c.BindJSON(&getres)
-	data := GetTemp{
+
+	/*data := GetTemp{
 		Id:    getres.Id,
 		Name:  getres.Name,
 		Pwd:   getres.Pwd,
 		Email: getres.Email,
-	}
+	}*/
+
 	bindErr := c.ShouldBind(&getres)
 	if bindErr == nil {
-		err := model.GetAll(getres.Id, getres.Name, getres.Pwd, getres.Email)
-		fmt.Println(err)
+		err, data := model.GetAll(getres.Id, getres.Name, getres.Pwd, getres.Email)
+
 		if err == nil {
 			c.JSON(http.StatusOK, gin.H{
 				"status": 0,
