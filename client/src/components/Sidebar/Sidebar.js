@@ -26,8 +26,14 @@ import TextSnippet from '@mui/icons-material/TextSnippet'
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
-import Logout from '../Logout/Logout';
-import {useHistory,useLocation} from 'react-router-dom'
+import Navigationbar from '../Navigationbar/Navigationbar';
+import { MyLogo } from '../AllDecoration/AllDecoration';
+import {useHistory,useLocation} from 'react-router-dom';
+//import { Container } from '@material-ui/core';
+import Container from '@mui/material/Container'
+import backgrounimg from '../../imginsrc/react-golang.jpg'
+import './DrawerList/Drawerlistone'
+import Drawerlistone from './DrawerList/Drawerlistone';
 const drawerWidth = 240;
 
 export default function Sidebar(){
@@ -38,16 +44,31 @@ export default function Sidebar(){
   };
   const history = useHistory();
   let title = "menubook";
+  
+  const classes = MyLogo();
   return(
     <>
     <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+        <AppBar position="fixed" 
+        sx={{ 
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          background: 'linear-gradient(128deg, rgba(10,153,33,1) 7%, rgba(253,187,45,1) 100%);' 
+        }}>
           <Toolbar>
-            <Typography variant="h6" noWrap component="div">
+            <img
+              src={backgrounimg}
+              className={classes.logo}
+              alt="Slider"
+            />
+            <Typography variant="h3" noWrap component="div" sx={{
+              fontFamily: 'Brush Script',
+              position: "relative",
+              left: 300,
+            }}>
               Acer
             </Typography>
-            <Logout/>
+            <Navigationbar/>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -97,7 +118,15 @@ export default function Sidebar(){
                     <MenuBookIcon/>
                   </IconButton>
                 </ListItemIcon>
-              <ListItemText primary="Starred" />
+                <ListItemText primary="Starred" />
+              </ListItemButton>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <IconButton color="primary" onClick={()=>history.push('/Inbox/test2')} >
+                    <MenuBookIcon/>
+                  </IconButton>
+                </ListItemIcon>
+                <ListItemText primary="Test2" />
               </ListItemButton>
             </List>
           </Collapse>
@@ -105,6 +134,7 @@ export default function Sidebar(){
       </Box>
     </Drawer>
   </Box>
+  
   </>
   )
 }

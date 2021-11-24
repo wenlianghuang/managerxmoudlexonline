@@ -12,7 +12,7 @@ import { Container } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Alert,IconButton,Collapse } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import {RoundButton,MyButton,RoundButton2} from '../AllDecoration/AllDecoration';
+import {MyButton,RoundButton2} from '../AllDecoration/AllDecoration';
 import axios from 'axios';
 export default function Signup(){
   

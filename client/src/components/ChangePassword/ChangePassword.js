@@ -15,7 +15,7 @@ import Alert from '@mui/material/Alert';
 import {createTheme , ThemeProvider } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import {RoundButton,MyButton,RoundButton2} from '../AllDecoration/AllDecoration';
+import {MyButton,RoundButton2} from '../AllDecoration/AllDecoration';
 
 import {useHistory,useLocation,Link} from 'react-router-dom'
 const theme = createTheme();
@@ -63,6 +63,7 @@ export default function ChangePassword(){
       setMyPassword('');
       setConfirmPW('');
       setOpen(true);
+      history.push("/")
     }).catch((error)=>{
       console.error(error);
     })

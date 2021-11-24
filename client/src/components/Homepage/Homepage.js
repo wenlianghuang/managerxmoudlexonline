@@ -16,6 +16,9 @@ import axios from 'axios'
 import {useHistory,useLocation,Link,Redirect} from 'react-router-dom'
 import AlertTitle from '@mui/material/AlertTitle';
 import Alert from '@mui/material/Alert';
+
+import allAction from "../../store/action"
+import {useSelector,useDispatch} from 'react-redux'
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -45,6 +48,9 @@ export default function Homepage({setToken}){
   const [myname,setMyName] = useState('');
   const [mypassword,setMyPassword] = useState('');
   const [erralert,setErrAlert] = useState(true);
+  //const accountUser = useSelector(state => state.login)
+  //const accountPassword = useSelector(state => state.password)
+  //const dispatch = useDispatch()
   const handleSubmit = async (event) => {
     event.preventDefault();
       /*const data = new FormData(event.currentTarget);
@@ -66,8 +72,11 @@ export default function Homepage({setToken}){
     setMyPassword('');
     console.log(res.data)
     sessionStorage.setItem("token",res.data.data.token)
+    sessionStorage.setItem("username",res.data.data.name)
     if(res.data.data.pwd === mypassword){
       //sessionStorage.setItem("token",res.data.data.token)
+      //dispatch(allAction.loginaccount.addLogInAccount(myname))
+      //dispatch(allAction.loginaccount.addLogInPassword(mypassword))
       history.replace(from)
       //return <Redirect to="/dashboard"/>
     }else{
@@ -98,19 +107,19 @@ export default function Homepage({setToken}){
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <Avatar sx={{ m: 1 }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <Box component="form" onSubmit={handleSubmit} Validate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
                 fullWidth
                 id="name"
-                label="name"
+                label="Name"
                 value={myname}
                 name="name"
                 autoComplete="Name"
@@ -137,7 +146,7 @@ export default function Homepage({setToken}){
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 2}}
               >
                 Sign In
               </Button>
@@ -179,7 +188,7 @@ export default function Homepage({setToken}){
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <Box component="form" onSubmit={handleSubmit} Validate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
