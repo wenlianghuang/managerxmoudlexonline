@@ -8,6 +8,7 @@ import Login from '../components/Login/Login';
 import Signup from '../components/Signup/Signup';
 import ChangePassword from '../components/ChangePassword/ChangePassword';
 import Inbox  from '../components/Inbox/Inbox';
+
 export default function Home(){
   /*const [token,setToken] = useState()
   if(!token){
@@ -21,7 +22,8 @@ export default function Home(){
         <Route path="/login" component={Login}/>
         <Route path="/Inbox/:title" component={Inbox}/>
         <Route path="/signup" component={Signup}/>
-        <Route path="/changepw" component={ChangePassword}/>    
+        <Route path="/changepw" component={ChangePassword}/>
+        
       </Switch>
     </>
   )
