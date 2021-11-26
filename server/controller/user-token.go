@@ -1,14 +1,3 @@
-/*
-Copyright 2019 BGBiao Ltd. All rights reserved.
-@File   : rds-disk.go
-@Time   : 2019/11/11 18:22:56
-@Update : 2019/11/11 18:22:56
-@Author : BGBiao
-@Version: 1.0
-@Contact: weichaungxxb@qq.com
-@Desc   : None
-*/
-
 package controller
 
 import (

@@ -51,6 +51,36 @@ const MyLogo = makeStyles({
   }
 })
 
+
+//table template
+const useTableStyles = makeStyles({
+  root: {
+    position: 'relative',
+    left: 280,
+    width: 1200,
+    top: '500px',
+    
+  },
+  container: {
+    position:'absolute',
+    top: -350,
+    maxHeight: 440,
+    justifyContent: 'center',
+  },
+  paperbutton:{
+    width: '30%',
+    display: 'flex',
+  },
+  pageStyle:{
+      height: '100vh',
+      backgroundColor: '#ffb3d9',
+  },
+  PaginationTemplate:{
+    position: 'absolute',
+    top: 100,
+    right:0,
+  }
+});
 //Testing
 const MyButton = styled(Button)({
   background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -61,4 +91,4 @@ const MyButton = styled(Button)({
   height: 48,
   padding: '0 30px',
 });
-export {MyButton,RoundButton2,RectengleButton,MyLogo}
+export {MyButton,RoundButton2,RectengleButton,MyLogo,useTableStyles}

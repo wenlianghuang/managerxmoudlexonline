@@ -1,13 +1,3 @@
-/*
-Copyright 2019 BGBiao Ltd. All rights reserved.
-@File   : main.go
-@Time   : 2019/11/11 16:20:45
-@Update : 2019/11/11 16:20:45
-@Author : BGBiao
-@Version: 1.0
-@Contact: weichaungxxb@qq.com
-@Desc   : None
-*/
 package main
 
 import (
@@ -15,6 +5,7 @@ import (
 	md "warnning-trigger/middleware"
 	"warnning-trigger/model"
 
+	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 )
 
@@ -30,6 +21,10 @@ func main() {
 
 	// 初始化Gin實例
 	router := gin.Default()
+
+	// 把前端的build放在後端這裡之後一起跑
+	router.Use(static.Serve("/", static.LocalFile("../client/build", true)))
+
 	v1 := router.Group("/apis/v1/")
 	{
 		v1.POST("/register", controller.RegisterUser)
@@ -50,5 +45,7 @@ func main() {
 	{
 		v1.PUT("/Update/:id", controller.UpdateUser)
 	}
-	router.Run(":5050")
+
+	//注意，如果想要在另外台ip是內網的話，可以用 port 80取代
+	router.Run("172.28.96.1:5050")
 }

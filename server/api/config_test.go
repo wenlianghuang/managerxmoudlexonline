@@ -1,12 +1,3 @@
-/*================================================================
-*Copyright (C) 2020 BGBiao Ltd. All rights reserved.
-*
-*FileName:config_test.go
-*Author:Xuebiao Xu
-*Date:2020年03月15日
-*Description:
-*
-================================================================*/
 package api
 
 import (
