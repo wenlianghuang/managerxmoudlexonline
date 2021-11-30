@@ -146,7 +146,7 @@ export default function Homepage({setToken}){
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2}}
+                sx={{ mt: 3, mb: 2 }}
               >
                 Sign In
               </Button>
