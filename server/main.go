@@ -22,7 +22,7 @@ func main() {
 	// 初始化Gin實例
 	router := gin.Default()
 
-	// 把前端的build放在後端這裡之後一起跑
+	// 把前端的build放在後端這裡之後一起跑 2021.11.26
 	router.Use(static.Serve("/", static.LocalFile("../client/build", true)))
 
 	v1 := router.Group("/apis/v1/")

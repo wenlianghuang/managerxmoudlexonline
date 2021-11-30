@@ -64,16 +64,6 @@ export default function TableDetail({subtitle}){
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  //Order
-  const [order, setOrder] = useState('asc');
-  const [orderBy, setOrderBy] = useState('name');
-
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
   };
@@ -84,7 +74,20 @@ export default function TableDetail({subtitle}){
     setPage(0);
   };
 
-  ////////////////////////////////////////////////
+  //Order 2021.11.26
+  const [order, setOrder] = useState('asc');
+  const [orderBy, setOrderBy] = useState('name');
+
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
+  //
+
+  
+
+  // Order 2021.11.26
   function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
       return -1;
@@ -150,6 +153,7 @@ export default function TableDetail({subtitle}){
     );
   }
   //////////////////////////////////////////////////////
+  
   return(
     <>
     <Paper className={tabletemplate.root}>

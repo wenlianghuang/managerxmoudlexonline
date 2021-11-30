@@ -44,7 +44,8 @@ export default function Navigationbar(){
     </Button>
     <Button 
       variant="contained"
-      style={{top:-74, left: 1050,backgroundColor: "#81D873"}}
+      //style={{top:-74, left: 1050,backgroundColor: "#81D873"}}
+      style={{top:-74,left:1050,background: 'blue'}}
       onClick={()=>history.push("/dashboard")}
     >
       HomePage
