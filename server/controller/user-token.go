@@ -22,7 +22,7 @@ type RegisterInfo struct {
 	Email string `json:"email"`
 }
 
-// 用戶註冊接口
+// 用戶註冊接口(User)
 func RegisterUser(c *gin.Context) {
 	var registerInfo RegisterInfo
 	bindErr := c.BindJSON(&registerInfo)
@@ -52,7 +52,7 @@ func RegisterUser(c *gin.Context) {
 	}
 }
 
-// 登錄結果
+// 登錄結果(User)
 type LoginResult struct {
 	Token string `json:"token"`
 	// 用戶模型
@@ -62,7 +62,7 @@ type LoginResult struct {
 	//model password
 }
 
-// 登錄接口 用戶名和密碼登錄
+// 登錄接口 用戶名和密碼登錄(User)
 // name,password
 func Login(c *gin.Context) {
 	var loginReq model.LoginReq
@@ -88,7 +88,7 @@ func Login(c *gin.Context) {
 	}
 }
 
-// token生成器
+// token生成器(User)
 func generateToken(c *gin.Context, user model.User) {
 
 	// 構造SignKey: 簽名和解簽名需要使用一個值
@@ -133,7 +133,7 @@ func generateToken(c *gin.Context, user model.User) {
 	return
 }
 
-// 測試一個需要認證的接口
+// 測試一個需要認證的接口(User)
 func GetDataByTime(c *gin.Context) {
 	claims := c.MustGet("claims").(*md.CustomClaims)
 	if claims != nil {
@@ -145,7 +145,7 @@ func GetDataByTime(c *gin.Context) {
 	}
 }
 
-//Update 接口
+//Update 接口(User)
 func UpdateUser(c *gin.Context) {
 	var updateres model.UpdateReq
 	//bindErr := c.BindJSON(&updateres)
@@ -179,26 +179,12 @@ func UpdateUser(c *gin.Context) {
 	}
 }
 
-type GetTemp struct {
-	Id    int32  `json:"id"`
-	Name  string `json:"name"`
-	Pwd   string `json:"password"`
-	Email string `json:"email"`
-}
-
+// Get 接口(User)
 func GetSomeOrigin(c *gin.Context) {
 
 	//var getres model.GetReq
 	var getres model.User
 	//bindErr := c.BindJSON(&getres)
-
-	/*data := GetTemp{
-		Id:    getres.Id,
-		Name:  getres.Name,
-		Pwd:   getres.Pwd,
-		Email: getres.Email,
-	}*/
-
 	bindErr := c.ShouldBind(&getres)
 	if bindErr == nil {
 		err, data := model.GetAll(getres.Id, getres.Name, getres.Pwd, getres.Email)
@@ -220,6 +206,100 @@ func GetSomeOrigin(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"status": -1,
 			"msg":    "用戶帳密相關數據失敗" + bindErr.Error(),
+			"data":   nil,
+		})
+	}
+}
+
+// golang struct to build a "BuildRCDTemp" 2021.11.30
+type BuildRCDTemp struct {
+	WOS        string `json:"wos"`
+	ModelType  string `json:"modeltype"`
+	ModelName  string `json:"modelname"`
+	SCLVersion string `json:"sclversion"`
+	POPPN      string `json:"poppn"`
+}
+
+//Function "BuildRCD" interface 2021.11.30
+func BuildRCDUser(c *gin.Context) {
+	var buildrcd model.Buildrcdreq
+
+	bindErr := c.BindJSON(&buildrcd)
+	data := BuildRCDTemp{
+		WOS:        buildrcd.WOS,
+		ModelType:  buildrcd.Modeltype,
+		ModelName:  buildrcd.Modelname,
+		SCLVersion: buildrcd.Sclversion,
+		POPPN:      buildrcd.POPPN,
+	}
+	fmt.Printf("Build RCD WOS: %+v\n", buildrcd.WOS)
+	fmt.Printf("All RCD: %+v\n", buildrcd)
+	if bindErr == nil {
+		err := model.BuildRCD(data.WOS, data.ModelType, data.ModelName, data.SCLVersion, data.POPPN)
+		if err == nil {
+			c.JSON(http.StatusOK, gin.H{
+				"status": 0,
+				"msg":    "RCD Build Successed",
+				"data":   data,
+			})
+		} else {
+			c.JSON(http.StatusOK, gin.H{
+				"status": -1,
+				"msg":    "Can not import to DB",
+				"data":   nil,
+			})
+		}
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"status": -1,
+			"msg":    "Some Error",
+			"data":   nil,
+		})
+	}
+}
+
+//Create POP 2021.12.01 Each variable are array
+type CreatePOPReq struct {
+	PreloadName       []string  `json:"preloadname"`
+	PreloadCode       []string  `json:"preloadcode"`
+	PreloadPopulation []int32   `json:"preloadpopulation"`
+	PreloadSize       []float32 `json:"preloadsize"`
+	PreloadDensity    []float32 `json:"preloaddensity"`
+}
+
+//Create POP Array 2021.12.01 useless now
+//type ArrCreatePOP []CreatePOPReq
+
+//Create POP function interface 2021.12.01
+func CreatePOPUser(c *gin.Context) {
+	var createpop CreatePOPReq
+	bindErr := c.BindJSON(&createpop)
+	fmt.Printf("First Country: +%v\n", createpop.PreloadCode[0])
+	if bindErr == nil {
+		//for loop of lots of checkbox 2021.12.02
+		for i := 0; i < len(createpop.PreloadName); i++ {
+			err := model.CreatePOP(createpop.PreloadName[i], createpop.PreloadCode[i], createpop.PreloadPopulation[i], createpop.PreloadSize[i], createpop.PreloadDensity[i])
+			if err == nil {
+				continue
+			} else {
+				fmt.Printf("Error of the array Create POP")
+				c.JSON(http.StatusOK, gin.H{
+					"status": -1,
+					"msg":    "Error of the multi-item in many checkbox",
+					"data":   nil,
+				})
+				return
+			}
+		}
+		c.JSON(http.StatusOK, gin.H{
+			"status": 0,
+			"msg":    "success",
+			"data":   createpop,
+		})
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"status": -1,
+			"msg":    "Error",
 			"data":   nil,
 		})
 	}

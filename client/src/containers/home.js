@@ -8,7 +8,9 @@ import Login from '../components/Login/Login';
 import Signup from '../components/Signup/Signup';
 import ChangePassword from '../components/ChangePassword/ChangePassword';
 import Inbox  from '../components/Inbox/Inbox';
-
+import RCDFunc from '../components/RCDFunc/RCDFunc';
+import OnlyforTesting from '../components/OnlyforTesting/OnlyforTesting';
+//import SearchBarTest from '../components/SearchBar/SearchBarTest';
 export default function Home(){
   /*const [token,setToken] = useState()
   if(!token){
@@ -23,7 +25,8 @@ export default function Home(){
         <Route path="/Inbox/:title" component={Inbox}/>
         <Route path="/signup" component={Signup}/>
         <Route path="/changepw" component={ChangePassword}/>
-        
+        <Route path="/RCDFunc/:title" component={RCDFunc}/>
+        <Route path="/onlyfortesting" component={OnlyforTesting}/>
       </Switch>
     </>
   )

@@ -2,46 +2,42 @@ import React,{useEffect, useState} from 'react'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
-import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import ListSubheader from '@mui/material/ListSubheader';
 import ListItemButton from '@mui/material/ListItemButton';
-import DraftsIcon from '@mui/icons-material/Drafts';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
-import SendIcon from '@mui/icons-material/Send';
-import StarBorder from '@mui/icons-material/StarBorder';
 import Source from '@mui/icons-material/Source'
-import TextSnippet from '@mui/icons-material/TextSnippet'
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
 import Navigationbar from '../Navigationbar/Navigationbar';
 import { MyLogo } from '../AllDecoration/AllDecoration';
 import {useHistory,useLocation} from 'react-router-dom';
-//import { Container } from '@material-ui/core';
-import Container from '@mui/material/Container'
 import backgrounimg from '../../imginsrc/react-golang.jpg'
-import './DrawerList/Drawerlistone'
-import Drawerlistone from './DrawerList/Drawerlistone';
+import './DrawerList/Drawerlistone';
+import MenuBook from '@mui/icons-material/MenuBook';
 const drawerWidth = 240;
 
 export default function Sidebar(){
   const [mobileOpen,setMobileOpen] = useState(false);
-  const [open, setOpen] = useState(true);
-  const handleClick = () => {
-    setOpen(!open);
+  //const [open, setOpen] = useState(true);
+  const [rcdfuncopen,setRCDFuncOpen] = useState(false);
+  const [inboxopen,setInboxOpen] = useState(false);
+  const handleRCDFuncClick = (e) => {
+    //setOpen(!open);
+    e.preventDefault();
+    setRCDFuncOpen(!rcdfuncopen);
   };
+  const handleInboxClick = (e) => {
+    e.preventDefault();
+    setInboxOpen(!inboxopen);
+  }
   const history = useHistory();
   let title = "menubook";
   
@@ -97,20 +93,58 @@ export default function Sidebar(){
               </ListItemIcon>
             <ListItemText primary="HomePage" />
           </ListItemButton>
-          <ListItemButton>
+          <ListItemButton onClick={handleRCDFuncClick}>
             <ListItemIcon>
-              <Source />
+              <Source/>
             </ListItemIcon>
-          <ListItemText primary="Drafts" />
+          <ListItemText primary="RCD Function"/>
+          {rcdfuncopen ? <ExpandLess/> : <ExpandMore/> }
           </ListItemButton>
-          <ListItemButton onClick={handleClick}>
+          <Collapse in={rcdfuncopen} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItemButton sx={{ pl: 4}}>
+                <ListItemIcon>
+                  <IconButton color="primary" onClick={()=>history.push("/RCDFunc/createpop")}>
+                    <MenuBookIcon/>
+                  </IconButton>
+                </ListItemIcon>
+              <ListItemText primary="Create POP"/>
+              </ListItemButton>
+              <ListItemButton sx={{ pl: 4}} >
+                <ListItemIcon>
+                  <IconButton color="primary" onClick={()=>history.push("/RCDFunc/buildrcd")}>
+                    <MenuBookIcon/>
+                  </IconButton>
+                </ListItemIcon>
+              <ListItemText primary="Build RCD"/>
+              </ListItemButton>
+              <ListItemButton sx={{ pl: 4}} >
+                <ListItemIcon>
+                  <IconButton color="primary" onClick={()=>history.push("/RCDFunc/buildingstatus")} >
+                    <MenuBookIcon/>
+                  </IconButton>
+                </ListItemIcon>
+              <ListItemText primary="Building Status"/>
+              </ListItemButton>
+              <ListItemButton sx={{ pl: 4}}>
+                <ListItemIcon>
+                  <IconButton color="primary" onClick={()=>history.push("/RCDFunc/rcdinfo")}>
+                    <MenuBookIcon/>
+                  </IconButton>
+                </ListItemIcon>
+              <ListItemText primary="RCD Information"/>
+              </ListItemButton>
+            </List>
+          </Collapse>
+          
+          <ListItemButton onClick={handleInboxClick}>
             <ListItemIcon>
               <Source />
             </ListItemIcon>
           <ListItemText primary="Inbox" />
-            {open ? <ExpandLess /> : <ExpandMore />}
+            {inboxopen ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
-          <Collapse in={open} timeout="auto" unmountOnExit>
+          <Collapse in={inboxopen} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <ListItemButton sx={{ pl: 4 }}>
                 <ListItemIcon>

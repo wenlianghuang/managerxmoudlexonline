@@ -13,7 +13,6 @@ import (
 	md "warnning-trigger/middleware"
 	"warnning-trigger/model"
 
-	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 )
 
@@ -30,9 +29,18 @@ func main() {
 	// 初始化Gin實例
 	router := gin.Default()
 
-	// 把前端的build放在後端這裡之後一起跑 2021.11.26
-	router.Use(static.Serve("/", static.LocalFile("../client/build", true)))
+	//sub router array
+	//arraytest := subipname.Subipname()
 
+	// 把前端的build放在後端這裡之後一起跑 2021.11.26
+	// 所有的route都要放在static.Server,不然它reload的時候會出現404 error
+	// 目前沒辦法一次就可以static.Serve所有的route
+	/*for i := 0; i < len(arraytest); i++ {
+		router.Use(static.Serve(arraytest[i], static.LocalFile("../client/build", true)))
+	}*/
+	//router.Use(static.Serve("/", static.LocalFile("../client/build", true)))
+	//router.Use(static.Serve("/dashboard", static.LocalFile("../client/build", true)))
+	//router.Use(static.Serve("/Inbox/test2", static.LocalFile("../client/build", true)))
 	v1 := router.Group("/apis/v1/")
 	{
 		v1.POST("/register", controller.RegisterUser)
@@ -54,11 +62,26 @@ func main() {
 		v1.PUT("/Update/:id", controller.UpdateUser)
 	}
 
+	//About "RCD Function" sub website 2021.11.30
+	rcdfunction := router.Group("/rcdfunc")
+	{ //2021.11.30
+		rcdfunction.POST("/buildrcd", controller.BuildRCDUser)
+
+		//2021.12.01
+		rcdfunction.POST("/createpop", controller.CreatePOPUser)
+	}
 	//注意，如果想要在另外台ip是內網的話，可以用 port 80取代
 	//router.Run(":5050")
 
+	//Gracefully shutdown by golang gin 2021.11.29
 	//原本是用router.Run()，要使用net/http套件的shutdown的話，需要使用原生的ListenAndServe
+	/*srv := &http.Server{
+		Addr:    "172.28.96.1:80",
+		Handler: router,
+	}*/
 	srv := &http.Server{
+		//Addr: "172.28.96.1:80"
+		//Addr: "10.36.126.12"
 		Addr:    ":5050",
 		Handler: router,
 	}
@@ -67,7 +90,7 @@ func main() {
 	//call goroutine啟動http server
 	go func() {
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			fmt.Println("SERVER GG惹:", err)
+			fmt.Println("SERVER not work:", err)
 		}
 	}()
 	//Notify：將系統訊號轉發至channel
@@ -79,9 +102,10 @@ func main() {
 	fmt.Println("Graceful Shutdown start - 1")
 	//透過context.WithTimeout產生一個新的子context，它的特性是有生命週期，這邊是設定10秒
 	//只要超過10秒就會自動發出Done()的訊息
-	c, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	c, cancel := context.WithTimeout(context.Background(), 1*time.Second)
 	defer cancel()
 	fmt.Println("Graceful Shutdown start - 2")
+
 	//使用net/http的shutdown進行關閉http server，參數是上面產生的子context，會有生命週期10秒，
 	//所以10秒內要把request全都消化掉，如果超時一樣會強制關閉，所以如果http server要處理的是
 	//需要花n秒才能處理的request就要把timeout時間拉長一點
