@@ -41,6 +41,7 @@ func main() {
 	//router.Use(static.Serve("/", static.LocalFile("../client/build", true)))
 	//router.Use(static.Serve("/dashboard", static.LocalFile("../client/build", true)))
 	//router.Use(static.Serve("/Inbox/test2", static.LocalFile("../client/build", true)))
+
 	v1 := router.Group("/apis/v1/")
 	{
 		v1.POST("/register", controller.RegisterUser)
@@ -75,13 +76,8 @@ func main() {
 
 	//Gracefully shutdown by golang gin 2021.11.29
 	//原本是用router.Run()，要使用net/http套件的shutdown的話，需要使用原生的ListenAndServe
-	/*srv := &http.Server{
-		Addr:    "172.28.96.1:80",
-		Handler: router,
-	}*/
 	srv := &http.Server{
 		//Addr: "172.28.96.1:80"
-		//Addr: "10.36.126.12"
 		Addr:    ":5050",
 		Handler: router,
 	}
