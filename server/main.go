@@ -28,7 +28,6 @@ func main() {
 
 	// 初始化Gin實例
 	router := gin.Default()
-
 	//sub router array
 	//arraytest := subipname.Subipname()
 

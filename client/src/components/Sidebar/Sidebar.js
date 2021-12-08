@@ -22,6 +22,7 @@ import {useHistory,useLocation} from 'react-router-dom';
 import backgrounimg from '../../imginsrc/react-golang.jpg'
 import './DrawerList/Drawerlistone';
 import MenuBook from '@mui/icons-material/MenuBook';
+import BuildOfflineRCD from '../BuildOfflineRCD/BuildOfflineRCD';
 const drawerWidth = 240;
 
 export default function Sidebar(){
@@ -93,6 +94,14 @@ export default function Sidebar(){
               </ListItemIcon>
             <ListItemText primary="HomePage" />
           </ListItemButton>
+          
+          <ListItemButton>
+            <ListItemIcon>
+              <Source onClick={()=>history.push("/buildofflinercd")}/>
+            </ListItemIcon>
+            <ListItemText primary="Build Offline RCD"/>
+          </ListItemButton>
+
           <ListItemButton onClick={handleRCDFuncClick}>
             <ListItemIcon>
               <Source/>

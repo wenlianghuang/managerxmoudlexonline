@@ -9,7 +9,8 @@ import Signup from '../components/Signup/Signup';
 import ChangePassword from '../components/ChangePassword/ChangePassword';
 import Inbox  from '../components/Inbox/Inbox';
 import RCDFunc from '../components/RCDFunc/RCDFunc';
-import OnlyforTesting from '../components/OnlyforTesting/OnlyforTesting';
+import OnlyforTesting from '../components/OnlyforTesting/OnlyforTesting'; //Only for practice
+import BuildOfflineRCD from '../components/BuildOfflineRCD/BuildOfflineRCD';
 //import SearchBarTest from '../components/SearchBar/SearchBarTest';
 export default function Home(){
   /*const [token,setToken] = useState()
@@ -27,6 +28,7 @@ export default function Home(){
         <Route path="/changepw" component={ChangePassword}/>
         <Route path="/RCDFunc/:title" component={RCDFunc}/>
         <Route path="/onlyfortesting" component={OnlyforTesting}/>
+        <Route path="/buildofflinercd" component={BuildOfflineRCD}/>
       </Switch>
     </>
   )
