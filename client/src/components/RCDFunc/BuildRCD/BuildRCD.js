@@ -179,14 +179,14 @@ export default function BuildRCD(){
                 <Button 
                 type="submit"
                 variant="contained"
-                style={{marginRight:20, width:200,top:30,backgroundColor:"#3498DB",color:"white"}}
+                style={{marginRight:20, width:200,top:30,backgroundColor:"#3498DB",color:"white",borderRadius:10}}
               >
                 Create RCD
               </Button>
               <Button 
                 type="submit"
                 variant="contained"
-                style={{marginRight:20, width:200,top:30,backgroundColor:"#3498DB",color:"white"}}
+                style={{marginRight:20, width:200,top:30,backgroundColor:"#3498DB",color:"white",borderRadius:10}}
                 onClick={handleBatchBuildRCD}
               >
                 Batch Button RCD
@@ -194,7 +194,7 @@ export default function BuildRCD(){
               <Button
                 type="file"
                 component="label"
-                style={{width: 200, top: 30,backgroundColor:"#3498DB",color:"white"}}
+                style={{width: 200, top: 30,backgroundColor:"#3498DB",color:"white",borderRadius: 10}}
               >
                 Upload file
                 <input 
