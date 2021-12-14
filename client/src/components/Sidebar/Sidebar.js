@@ -16,6 +16,7 @@ import Collapse from '@mui/material/Collapse';
 import Source from '@mui/icons-material/Source'
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import IconButton from '@mui/material/IconButton';
+import Divider from '@mui/material/Divider';
 import Navigationbar from '../Navigationbar/Navigationbar';
 import { MyLogo } from '../AllDecoration/AllDecoration';
 import {useHistory,useLocation} from 'react-router-dom';
@@ -82,26 +83,22 @@ export default function Sidebar(){
             sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
             component="nav"
             aria-labelledby="nested-list-subheader"
-            subheader={
-            <ListSubheader component="div" id="nested-list-subheader">
-              Nested List Items
-            </ListSubheader>
-            }
+            
           >
-            <ListItemButton>
+            <ListItemButton >
               <ListItemIcon>
                   <Source onClick={()=>history.push("/dashboard")} />
               </ListItemIcon>
             <ListItemText primary="HomePage" />
           </ListItemButton>
-          
-          <ListItemButton>
+          <Divider component="li" style={{borderBottomWidth:0.5,background:"green"}}/>
+          <ListItemButton onClick={()=>history.push("/buildofflinercd")}>
             <ListItemIcon>
-              <Source onClick={()=>history.push("/buildofflinercd")}/>
+              <Source />
             </ListItemIcon>
             <ListItemText primary="Build Offline RCD"/>
           </ListItemButton>
-
+          <Divider component="li" style={{borderBottomWidth:0.5, background:"green"}}/>
           <ListItemButton onClick={handleRCDFuncClick}>
             <ListItemIcon>
               <Source/>
@@ -111,33 +108,33 @@ export default function Sidebar(){
           </ListItemButton>
           <Collapse in={rcdfuncopen} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4}}>
+              <ListItemButton sx={{ pl: 4}} onClick={()=>history.push("/RCDFunc/createpop")} >
                 <ListItemIcon>
-                  <IconButton color="primary" onClick={()=>history.push("/RCDFunc/createpop")}>
+                  <IconButton color="primary" >
                     <MenuBookIcon/>
                   </IconButton>
                 </ListItemIcon>
               <ListItemText primary="Create POP"/>
               </ListItemButton>
-              <ListItemButton sx={{ pl: 4}} >
+              <ListItemButton sx={{ pl: 4}} onClick={()=>history.push("/RCDFunc/buildrcd")} >
                 <ListItemIcon>
-                  <IconButton color="primary" onClick={()=>history.push("/RCDFunc/buildrcd")}>
+                  <IconButton color="primary" >
                     <MenuBookIcon/>
                   </IconButton>
                 </ListItemIcon>
               <ListItemText primary="Build RCD"/>
               </ListItemButton>
-              <ListItemButton sx={{ pl: 4}} >
+              <ListItemButton sx={{ pl: 4}} onClick={()=>history.push("/RCDFunc/buildingstatus")} >
                 <ListItemIcon>
-                  <IconButton color="primary" onClick={()=>history.push("/RCDFunc/buildingstatus")} >
+                  <IconButton color="primary"  >
                     <MenuBookIcon/>
                   </IconButton>
                 </ListItemIcon>
               <ListItemText primary="Building Status"/>
               </ListItemButton>
-              <ListItemButton sx={{ pl: 4}}>
+              <ListItemButton sx={{ pl: 4}} onClick={()=>history.push("/RCDFunc/rcdinfo")} >
                 <ListItemIcon>
-                  <IconButton color="primary" onClick={()=>history.push("/RCDFunc/rcdinfo")}>
+                  <IconButton color="primary" >
                     <MenuBookIcon/>
                   </IconButton>
                 </ListItemIcon>
@@ -145,7 +142,7 @@ export default function Sidebar(){
               </ListItemButton>
             </List>
           </Collapse>
-          
+          <Divider style={{borderBottomWidth:0.5, background:"green"}}/>
           <ListItemButton onClick={handleInboxClick}>
             <ListItemIcon>
               <Source />
@@ -155,17 +152,17 @@ export default function Sidebar(){
           </ListItemButton>
           <Collapse in={inboxopen} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
+              <ListItemButton sx={{ pl: 4 }} onClick={()=>history.push(`/Inbox/${title}`)}>
                 <ListItemIcon>
-                  <IconButton color="primary" onClick={()=>history.push(`/Inbox/${title}`)} >
+                  <IconButton color="primary"  >
                     <MenuBookIcon/>
                   </IconButton>
                 </ListItemIcon>
                 <ListItemText primary="Starred" />
               </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }}>
+              <ListItemButton sx={{ pl: 4 }} onClick={()=>history.push('/Inbox/test2')}>
                 <ListItemIcon>
-                  <IconButton color="primary" onClick={()=>history.push('/Inbox/test2')} >
+                  <IconButton color="primary"  >
                     <MenuBookIcon/>
                   </IconButton>
                 </ListItemIcon>
@@ -173,6 +170,7 @@ export default function Sidebar(){
               </ListItemButton>
             </List>
           </Collapse>
+          <Divider style={{borderBottomWidth:0.5,background:"green"}}/>
         </List>
       </Box>
     </Drawer>
