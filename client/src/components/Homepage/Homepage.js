@@ -17,8 +17,8 @@ import {useHistory,useLocation,Link,Redirect} from 'react-router-dom'
 import AlertTitle from '@mui/material/AlertTitle';
 import Alert from '@mui/material/Alert';
 
-import allAction from "../../store/action"
-import {useSelector,useDispatch} from 'react-redux'
+//import allAction from "../../store/action";
+import {useSelector,useDispatch} from 'react-redux';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
