@@ -74,10 +74,8 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell align="left" colSpan={6} style={{color:'white',backgroundColor:'#7F8C8D',fontSize:30}} >
-          Preload PN Information
-        </TableCell>
       </TableRow>
+      
       <TableRow>
         <TableCell padding="checkbox">
           <Checkbox
@@ -384,7 +382,10 @@ export default function CreatePOP(){
             style={{width:300,position:'absolute',right:0,top:400}}
           />
           <Paper style={{ width: 1100,position:'absolute',top:500,left:350}}>
-          
+            <Box
+              style={{position: "relative",paddingLeft:20, width: "100%",height:55,color:'white',backgroundColor:'#7F8C8D',fontSize:30}}>
+                Preload PN Information
+            </Box>
             <TableContainer style={{ maxHeight: 340  }}>
               <Table stickyHeader aria-label="sticky table">
                 {/*
