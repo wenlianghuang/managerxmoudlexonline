@@ -78,7 +78,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 接下來要介紹`在 client 資料夾中的子資料夾和它的code file`。
 
-<table style="position:fixed;left:30px;" >
+<table style="position:fixed;right:30px;margin-left:20px;" >
     <tr>
       <td colspan=2>src</td>
     </tr>
