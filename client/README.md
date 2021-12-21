@@ -80,7 +80,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 <table>
     <tr>
-      <td>src</td>
+      <td colspan=2>src</td>
     </tr>
     <tr>
       <td>containers</td>
