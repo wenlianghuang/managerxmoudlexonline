@@ -78,12 +78,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 接下來要介紹`在 client 資料夾中的子資料夾和它的code file`。
 <style>
-  .tablecenter{
+  #tablecenter{
     margin-left:auto;
     margin-right:auto;
   }
 </style>
-<table class="tablecenter">
+<table id="tablecenter">
     <tr>
       <td colspan=2>src</td>
     </tr>
