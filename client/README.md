@@ -70,3 +70,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 # Client 資料庫表格化
+上面都是當初react在`npx create-react-app`後自動產生相對應的README.md，裏頭有
+
+產生react `package.json` 和其中各種的library，想要深入了解react到底是怎麼架構
+
+出來的話還請看[這邊](https://reactjs.org/)。
+
+接下來要介紹`在 client 資料夾中的子資料夾和它的code file`。
+
+Age           | Time  | Food | Gold | Requirement
+--------------|:-----:|-----:| ----:|------------------------
+Feudal Age    | 02:10 |  500 |    0 | Dark Age building x 2
+Castle Age    | 02:40 |  800 |  200 | Feudal Age building x 2
+Imperial Age  | 03:30 | 1000 |  800 | Castle Age building x 2   
