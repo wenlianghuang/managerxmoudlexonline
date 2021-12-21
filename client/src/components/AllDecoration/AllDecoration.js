@@ -46,8 +46,8 @@ const RoundButton2 = makeStyles({
 // Logo with Header
 const MyLogo = makeStyles({
   logo:{
-    maxHeight: 100,
-    maxWidth: 80,
+    maxHeight: 45,
+    maxWidth: 220,
   }
 })
 
