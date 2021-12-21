@@ -19,7 +19,8 @@ import Divider from '@mui/material/Divider';
 import Navigationbar from '../Navigationbar/Navigationbar';
 import { MyLogo } from '../AllDecoration/AllDecoration';
 import {useHistory,useLocation} from 'react-router-dom';
-import backgrounimg from '../../imginsrc/react-golang.jpg'
+import backgroundimg from '../../imginsrc/react-golang.jpg'
+import acerlogo from '../../imginsrc/acerlogo.gif';
 import './DrawerList/Drawerlistone';
 import MenuBook from '@mui/icons-material/MenuBook';
 import BuildOfflineRCD from '../BuildOfflineRCD/BuildOfflineRCD';
@@ -50,14 +51,27 @@ export default function Sidebar(){
         <AppBar position="fixed" 
         sx={{ 
           zIndex: (theme) => theme.zIndex.drawer + 1,
-          background: 'linear-gradient(128deg, rgba(10,153,33,1) 7%, rgba(253,187,45,1) 100%);' 
+          background: 'linear-gradient(128deg, rgba(10,153,33,1) 7%, rgba(253,187,45,1) 100%);',
+          height:55,
         }}>
           <Toolbar>
             <img
-              src={backgrounimg}
+              src={backgroundimg}
               className={classes.logo}
               alt="Slider"
             />
+            <img 
+              src={acerlogo}
+              className={classes.logo}
+              alt="Acer"
+              style={{
+                position: "relative",
+                height:45,
+                width:220,
+                left:500,
+              }}
+            />
+            {/*
             <Typography variant="h3" noWrap component="div" sx={{
               fontFamily: 'Brush Script',
               position: "relative",
@@ -65,6 +79,7 @@ export default function Sidebar(){
             }}>
               Acer
             </Typography>
+          */}
             <Navigationbar/>
           </Toolbar>
         </AppBar>
