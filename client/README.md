@@ -78,12 +78,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 接下來要介紹`在 client 資料夾中的子資料夾和它的code file`。
 
-src
-----------------------|-------------------------------------
-components            |containers
-:-----------------------------------------------------------:
-Age           | Time  | Food | Gold | Requirement
---------------|:-----:|-----:| ----:|------------------------
-Feudal Age    | 02:10 |  500 |    0 | Dark Age building x 2
-Castle Age    | 02:40 |  800 |  200 | Feudal Age building x 2
-Imperial Age  | 03:30 | 1000 |  800 | Castle Age building x 2   
+<table>
+    <tr>
+    <td>項次</td>
+    <td>品名</td>
+    <td>描述</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>iPhone 5</td>
+    <td>iPhone 5是由蘋果公司開發的觸控式螢幕智慧型手機，是第六代的iPhone和繼承前一代的iPhone 4S。這款手機的設計比較以前產品更薄、更輕，及擁有更高解析度及更廣闊的4英寸觸控式螢幕，支援16:9寬螢幕。這款手機包括了一個自定義設計的ARMv7處理器的蘋果A6的更新、iOS 6操作系統，並且支援高速LTE網路。</td>
+  </tr>
+</table>
