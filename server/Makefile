@@ -1,6 +1,6 @@
 .PHONY: list vet default fmt fmt-check clean
 all: list default fmt docker_build docker_tag docker_push clean
-# BINARY即为app的名称
+# BINARY即為app的名稱
 BINARY="ali-warn-api"
 VERSION=0.0.1
 BUILD=`date +%F`
@@ -12,7 +12,7 @@ GOFILES=`find . -name "*.go" -type f -not -path "./vendor/*"`
 
 default:
 	@echo "build the ${BINARY}"
-	@#这个--tags=jsoniter是个什么鬼啊
+	@#這個--tags=jsoniter是個什麼鬼阿
 	@GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o ${BINARY}  -tags=jsoniter
 	@echo "build done."
 
