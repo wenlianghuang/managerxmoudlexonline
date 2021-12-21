@@ -83,7 +83,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
     margin-right:auto;
   }
 </style>
-<table id="tablecenter">
+<table style="margin: 0px auto;">
     <tr>
       <td colspan=2>src</td>
     </tr>
