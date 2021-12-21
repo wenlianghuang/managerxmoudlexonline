@@ -1,6 +1,6 @@
 ## 前端--React.js
 
-利用react.js來開發client
+利用react.js來開發client，詳細可以進入[client資料夾](http://10.36.22.111:8180/kyd200/kyd220/managerxonline/-/tree/main/client)看裡面的內容以及Readme.md
 
 ## 後端--Golang
 
