@@ -81,6 +81,18 @@ const useTableStyles = makeStyles({
     right:0,
   }
 });
+
+//SideBar header Box
+const SideBarHeader = makeStyles({
+  eachBox:{
+      textAlign:'center',
+      width:"65%",
+      fontSize:30,
+      left:140,
+      color:"white",
+      backgroundColor:"gray"
+  }
+});
 //Testing
 const MyButton = styled(Button)({
   background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -91,4 +103,4 @@ const MyButton = styled(Button)({
   height: 48,
   padding: '0 30px',
 });
-export {MyButton,RoundButton2,RectengleButton,MyLogo,useTableStyles}
+export {MyButton,RoundButton2,RectengleButton,MyLogo,useTableStyles,SideBarHeader}
