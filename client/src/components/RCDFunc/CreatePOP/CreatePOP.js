@@ -18,6 +18,8 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
+import {SideBarHeader} from '../../AllDecoration/AllDecoration'
+
 const columns = [
   { id: 'name', label: 'Name', minWidth: 170,align:'left' },
   { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
@@ -113,6 +115,9 @@ export default function CreatePOP(){
   const [sclrefresh,setSCLRefresh] = useState('');
   const [gcm,setGCM] = useState('');
   
+  //2021.12.24
+  const classes = SideBarHeader();
+
   //About Search
   const [searched, setSearched] = useState("");
   const [filterrow,setFilterRow] = useState(rows);
@@ -272,6 +277,7 @@ export default function CreatePOP(){
           position:'relative'
         }}
       >
+        {/*
         <Typography
               style={{
                 color:"white",
@@ -280,6 +286,10 @@ export default function CreatePOP(){
         >
           SCL Information
         </Typography>
+            */}
+        <Box className={classes.eachBox}>
+          SCL Information
+        </Box>
         <Box component="form" Validate sx={{ maxWidth: 1000,maxHeight:100,mt:2 }}>
           <Box style={{width: "80%",marginBottom:1,position:'absolute',top:70,width:300,marginRight:50,left:350}}>
           <TextField

@@ -21,7 +21,7 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-
+import {SideBarHeader} from '../../AllDecoration/AllDecoration'
 export default function BuildRCD(){
   const theme = createTheme();
   const [wos,setWOS] = useState("");
@@ -33,6 +33,7 @@ export default function BuildRCD(){
   const [buildsuccess,setBuildSuccess] = useState(false);
   const history = useHistory();
 
+  const classes = SideBarHeader();
   
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -87,6 +88,7 @@ export default function BuildRCD(){
               alignItems: 'center',
             }}
           >
+            {/*
             <Typography
               style={{
                 color:"white",
@@ -95,6 +97,11 @@ export default function BuildRCD(){
             >
               RCD Properties
             </Typography>
+            */}
+            <Box
+              className={classes.eachBox}>
+                RCD Properties
+              </Box>
             <Box component="form" onSubmit={handleSubmit} Validate sx={{ maxWidth: 500,maxHeight:100,mt:2 }}>
               <div style={{position: 'relative',top:30}}>
                 

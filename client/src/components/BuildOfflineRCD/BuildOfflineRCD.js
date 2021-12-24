@@ -21,6 +21,7 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import {SideBarHeader} from '../AllDecoration/AllDecoration'
 export default function BuildOfflineRCD(){
   const [osabbr,setOSAbbr] = useState("");
   const [modelcomputer,setModelComputer] = useState("");
@@ -28,6 +29,8 @@ export default function BuildOfflineRCD(){
   const [sclversion,setSCLVersion] = useState("");
   const [pop,setPOP] = useState("");
   const [split,setSplit] = useState("");
+  //2021.12.24
+  const classes = SideBarHeader();
   return(
     <>
       <Sidebar/>
@@ -40,6 +43,7 @@ export default function BuildOfflineRCD(){
           position:'relative'
         }}
       >
+        {/*
         <Typography
               style={{
                 color:"white",
@@ -48,17 +52,13 @@ export default function BuildOfflineRCD(){
         >
           Building Offline RCD
         </Typography>
-
-        <Box component="form" Validate >
-        <Typography
-              style={{
-                color:"black",
-                position:"absolute",
-                left: 0,
-              }}
+        */}
+        <Box 
+          className={classes.eachBox}
         >
           Building Offline RCD
-        </Typography>
+        </Box>
+        <Box component="form" Validate >
         <Box style={{width: "80%",marginBottom:1,position:'absolute',top:70,width:300,marginRight:50,left:350}}>
           <FormControl required Validate fullWidth style={{left:0,marginBottom:25}}>
             <InputLabel id="woslabel">OS Abbr</InputLabel>
