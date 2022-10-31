@@ -2,7 +2,10 @@ package model
 
 import (
 	"fmt"
-	"warnning-trigger/api"
+	/*
+		"warnning-trigger/api"
+	*/
+	"mattbackend/api"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"

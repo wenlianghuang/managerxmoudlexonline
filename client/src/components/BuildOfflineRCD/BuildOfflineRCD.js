@@ -24,13 +24,49 @@ import CloseIcon from '@mui/icons-material/Close';
 import {SideBarHeader} from '../AllDecoration/AllDecoration'
 export default function BuildOfflineRCD(){
   const [osabbr,setOSAbbr] = useState("");
+  const [wos,setWOS] = useState("");
   const [modelcomputer,setModelComputer] = useState("");
   const [modelname,setModelName] = useState("");
   const [sclversion,setSCLVersion] = useState("");
   const [pop,setPOP] = useState("");
+  const [createsuccess,setCreateSuccess] = useState(false);
   const [split,setSplit] = useState("");
   //2021.12.24
   const classes = SideBarHeader();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log("WOS: ",wos)
+    await axios.post("/buildofflinercd",{
+      osabbr: osabbr,
+      wos: wos,
+      modelcomputer: modelcomputer,
+      modelname: modelname,
+      sclversion: sclversion,
+      pop: pop,
+      split: split
+    },
+    {
+      headers:{
+        "Content-Type": "application/json",
+      },
+    }
+    ).then((res)=>{
+      console.log(res.data)
+      setOSAbbr('')
+      setWOS('');
+      setModelComputer('');
+      setModelName('');
+      setSCLVersion('');
+      setPOP('');
+      setSplit('');
+      setCreateSuccess(true);
+      
+    }).catch((error)=>{
+      console.error(error)
+    })
+    
+  }
   return(
     <>
       <Sidebar/>
@@ -65,9 +101,9 @@ export default function BuildOfflineRCD(){
               <Select
                   labelId="woslabelid"
                   id="wosid"
-                  value={osabbr}
+                  value={wos}
                   label="OS Abbr"
-                  //onChange={(e) => setWOS(e.target.value)}
+                  onChange={(e) => setWOS(e.target.value)}
                 >
                   <MenuItem value={"OS Abbr A"}>WOS A</MenuItem>
                   <MenuItem value={"OS Abbr B"}>WOS B</MenuItem>
@@ -81,7 +117,7 @@ export default function BuildOfflineRCD(){
                   id="modelcomputer"
                   value={modelcomputer}
                   label="Model Computer"
-                  //onChange={(e)=>setModelType(e.target.value)}
+                  onChange={(e)=>setModelComputer(e.target.value)}
                 >
                   <MenuItem value={"Model Type A"}>Model Type A</MenuItem>
                   <MenuItem value={"Model Type B"}>Model Type B</MenuItem>
@@ -94,8 +130,8 @@ export default function BuildOfflineRCD(){
                   labelId="modelname"
                   id="modelname"
                   value={modelname}
-                  label="Model Type"
-                  //onChange={(e)=>setModelName(e.target.value)}
+                  label="Model Name"
+                  onChange={(e)=>setModelName(e.target.value)}
                 >
                   <MenuItem value={"Model Name A"}>Model Name A</MenuItem>
                   <MenuItem value={"Model Name B"}>Model Name B</MenuItem>
@@ -109,7 +145,7 @@ export default function BuildOfflineRCD(){
                   id="sclversionid"
                   value={sclversion}
                   label="SCL Version"
-                  //onChange={(e)=>setSCLVersion(e.target.value)}
+                  onChange={(e)=>setSCLVersion(e.target.value)}
                 >
                   <MenuItem value={"SCL Version A"}>SCL Version A</MenuItem>
                   <MenuItem value={"SCL Version B"}>SCL Version B</MenuItem>
@@ -123,7 +159,7 @@ export default function BuildOfflineRCD(){
                   id="popid"
                   value={pop}
                   label="POP"
-                  //onChange={(e)=>setPOPPN(e.target.value)}
+                  onChange={(e)=>setPOP(e.target.value)}
                 >
                   <MenuItem value={"POP PN A"}>POP PN A</MenuItem>
                   <MenuItem value={"POP PN B"}>POP PN B</MenuItem>
@@ -137,6 +173,7 @@ export default function BuildOfflineRCD(){
                   id="splitid"
                   value={split}
                   label="Split"
+                  onChange={(e)=>setSplit(e.target.value)}
                 >
                   <MenuItem value={"X"}>X</MenuItem>
                   <MenuItem value={"Y"}>Y</MenuItem>

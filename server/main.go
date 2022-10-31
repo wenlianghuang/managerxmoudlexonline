@@ -4,14 +4,20 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"mattbackend/controller"
+	"mattbackend/middleware"
+	"mattbackend/model"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
-	"warnning-trigger/controller"
-	md "warnning-trigger/middleware"
-	"warnning-trigger/model"
+
+	/*
+		"warnning-trigger/controller"
+		md "warnning-trigger/middleware"
+		"warnning-trigger/model"
+	*/
 
 	"github.com/gin-gonic/gin"
 )
@@ -24,6 +30,8 @@ func main() {
 	}
 
 	model.InitModel()
+	model.InitBuildRCD()
+	model.InitCreatePOP()
 	defer model.DB.Close()
 
 	// 初始化Gin實例
@@ -52,7 +60,8 @@ func main() {
 	}
 	// secure v1
 	sv1 := router.Group("/apis/v1/auth/")
-	sv1.Use(md.JWTAuth())
+	//sv1.Use(md.JWTAuth())
+	sv1.Use(middleware.JWTAuth())
 	{
 		sv1.GET("/time", controller.GetDataByTime)
 
@@ -69,7 +78,11 @@ func main() {
 
 		//2021.12.01
 		rcdfunction.POST("/createpop", controller.CreatePOPUser)
+
 	}
+
+	//Acout "Build Offline RCD" subnet 2022.10.31
+	router.POST("/buildofflinercd", controller)
 	//注意，如果想要在另外台ip是內網的話，可以用 port 80取代
 	//router.Run(":5050")
 

@@ -4,11 +4,15 @@ import (
 	"fmt"
 	_ "fmt"
 	"log"
+	md "mattbackend/middleware"
+	"mattbackend/model"
 	"net/http"
 	"time"
-	md "warnning-trigger/middleware"
-	"warnning-trigger/model"
 
+	/*
+		md "warnning-trigger/middleware"
+		"warnning-trigger/model"
+	*/
 	jwtgo "github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 )
@@ -145,7 +149,7 @@ func GetDataByTime(c *gin.Context) {
 	}
 }
 
-//Update 接口(User)
+// Update 接口(User)
 func UpdateUser(c *gin.Context) {
 	var updateres model.UpdateReq
 	//bindErr := c.BindJSON(&updateres)
@@ -188,7 +192,6 @@ func GetSomeOrigin(c *gin.Context) {
 	bindErr := c.ShouldBind(&getres)
 	if bindErr == nil {
 		err, data := model.GetAll(getres.Id, getres.Name, getres.Pwd, getres.Email)
-
 		if err == nil {
 			c.JSON(http.StatusOK, gin.H{
 				"status": 0,
@@ -220,7 +223,7 @@ type BuildRCDTemp struct {
 	POPPN      string `json:"poppn"`
 }
 
-//Function "BuildRCD" interface 2021.11.30
+// Function "BuildRCD" interface 2021.11.30
 func BuildRCDUser(c *gin.Context) {
 	var buildrcd model.Buildrcdreq
 
@@ -243,11 +246,13 @@ func BuildRCDUser(c *gin.Context) {
 				"data":   data,
 			})
 		} else {
+
 			c.JSON(http.StatusOK, gin.H{
 				"status": -1,
 				"msg":    "Can not import to DB",
 				"data":   nil,
 			})
+
 		}
 	} else {
 		c.JSON(http.StatusOK, gin.H{
@@ -258,7 +263,7 @@ func BuildRCDUser(c *gin.Context) {
 	}
 }
 
-//Create POP 2021.12.01 Each variable are array
+// Create POP 2021.12.01 Each variable are array
 type CreatePOPReq struct {
 	PreloadName       []string  `json:"preloadname"`
 	PreloadCode       []string  `json:"preloadcode"`
@@ -270,7 +275,7 @@ type CreatePOPReq struct {
 //Create POP Array 2021.12.01 useless now
 //type ArrCreatePOP []CreatePOPReq
 
-//Create POP function interface 2021.12.01
+// Create POP function interface 2021.12.01
 func CreatePOPUser(c *gin.Context) {
 	var createpop CreatePOPReq
 	bindErr := c.BindJSON(&createpop)
@@ -300,6 +305,47 @@ func CreatePOPUser(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"status": -1,
 			"msg":    "Error",
+			"data":   nil,
+		})
+	}
+}
+
+// Offline RCD
+func OfflineRCDUser(c *gin.Context) {
+	var offlinercd model.Offlinercd
+
+	bindErr := c.BindJSON(&offlinercd)
+	data := model.Offlinercd{
+		OSAttr:        offlinercd.OSAttr,
+		ModelComputer: offlinercd.ModelComputer,
+		ModelName:     offlinercd.ModelName,
+		SCLVersion:    offlinercd.SCLVersion,
+		POP:           offlinercd.POP,
+		Split:         offlinercd.Split,
+	}
+	//fmt.Printf("Build RCD WOS: %+v\n", buildrcd.WOS)
+	//fmt.Printf("All RCD: %+v\n", buildrcd)
+	if bindErr == nil {
+		err := model.OfflineRCD(data.OSAttr, data.ModelComputer, data.ModelName, data.SCLVersion, data.POP, data.Split)
+		if err == nil {
+			c.JSON(http.StatusOK, gin.H{
+				"status": 0,
+				"msg":    "Offline RCD Build Successed",
+				"data":   data,
+			})
+		} else {
+
+			c.JSON(http.StatusOK, gin.H{
+				"status": -1,
+				"msg":    "Can not import to DB",
+				"data":   nil,
+			})
+
+		}
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"status": -1,
+			"msg":    "Some Error",
 			"data":   nil,
 		})
 	}
