@@ -32,6 +32,7 @@ func main() {
 	model.InitModel()
 	model.InitBuildRCD()
 	model.InitCreatePOP()
+	model.InitOfflineRCD()
 	defer model.DB.Close()
 
 	// 初始化Gin實例
@@ -82,7 +83,11 @@ func main() {
 	}
 
 	//Acout "Build Offline RCD" subnet 2022.10.31
-	router.POST("/buildofflinercd", controller)
+	offlinercdfunction := router.Group("/buildofflinercd")
+	{
+		offlinercdfunction.POST("", controller.OfflineRCDUser)
+	}
+
 	//注意，如果想要在另外台ip是內網的話，可以用 port 80取代
 	//router.Run(":5050")
 
