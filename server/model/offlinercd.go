@@ -2,7 +2,7 @@ package model
 
 type Offlinercd struct {
 	Id            int32  `gorm:"AUTO_INCREMENT"`
-	OSAttr        string `json:"osattr"`
+	WOS           string `json:"wos"`
 	ModelComputer string `json:"modelcomputer"`
 	ModelName     string `json:"modelname"`
 	SCLVersion    string `json:"sclversion"`
@@ -18,9 +18,9 @@ func (offrcd *Offlinercd) OfflineRCDInsert() error {
 	return DB.Model(&Offlinercd{}).Create(&offrcd).Error
 }
 
-func OfflineRCD(osattr string, modelcomputer string, modelname string, sclversion string, pop string, split string) error {
+func OfflineRCD(wos string, modelcomputer string, modelname string, sclversion string, pop string, split string) error {
 	offlinercd := Offlinercd{
-		OSAttr:        osattr,
+		WOS:           wos,
 		ModelComputer: modelcomputer,
 		ModelName:     modelname,
 		SCLVersion:    sclversion,
