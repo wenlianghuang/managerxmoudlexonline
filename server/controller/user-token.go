@@ -316,7 +316,7 @@ func OfflineRCDUser(c *gin.Context) {
 
 	bindErr := c.BindJSON(&offlinercd)
 	data := model.Offlinercd{
-		OSAttr:        offlinercd.OSAttr,
+		WOS:           offlinercd.WOS,
 		ModelComputer: offlinercd.ModelComputer,
 		ModelName:     offlinercd.ModelName,
 		SCLVersion:    offlinercd.SCLVersion,
@@ -326,7 +326,7 @@ func OfflineRCDUser(c *gin.Context) {
 	//fmt.Printf("Build RCD WOS: %+v\n", buildrcd.WOS)
 	//fmt.Printf("All RCD: %+v\n", buildrcd)
 	if bindErr == nil {
-		err := model.OfflineRCD(data.OSAttr, data.ModelComputer, data.ModelName, data.SCLVersion, data.POP, data.Split)
+		err := model.OfflineRCD(data.WOS, data.ModelComputer, data.ModelName, data.SCLVersion, data.POP, data.Split)
 		if err == nil {
 			c.JSON(http.StatusOK, gin.H{
 				"status": 0,
