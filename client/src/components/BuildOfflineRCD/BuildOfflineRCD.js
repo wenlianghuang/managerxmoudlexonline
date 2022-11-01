@@ -38,7 +38,6 @@ export default function BuildOfflineRCD(){
     event.preventDefault();
     console.log("WOS: ",wos)
     await axios.post("/buildofflinercd",{
-      osabbr: osabbr,
       wos: wos,
       modelcomputer: modelcomputer,
       modelname: modelname,
@@ -94,7 +93,7 @@ export default function BuildOfflineRCD(){
         >
           Building Offline RCD
         </Box>
-        <Box component="form" Validate >
+        <Box component="form" Validate onSubmit={handleSubmit}>
         <Box style={{width: "80%",marginBottom:1,position:'absolute',top:70,width:300,marginRight:50,left:350}}>
           <FormControl required Validate fullWidth style={{left:0,marginBottom:25}}>
             <InputLabel id="woslabel">OS Abbr</InputLabel>
@@ -179,6 +178,13 @@ export default function BuildOfflineRCD(){
                   <MenuItem value={"Y"}>Y</MenuItem>
                 </Select>
               </FormControl>
+              <Button 
+                type="submit"
+                variant="contained"
+                style={{marginRight:20, width:200,top:30,backgroundColor:"#3498DB",color:"white",borderRadius:10}}
+              >
+                Create RCD
+              </Button>
           </Box>
         </Box>
       </Box>
