@@ -11,6 +11,7 @@ import Inbox  from '../components/Inbox/Inbox';
 import RCDFunc from '../components/RCDFunc/RCDFunc';
 import OnlyforTesting from '../components/OnlyforTesting/OnlyforTesting'; //Only for practice
 import BuildOfflineRCD from '../components/BuildOfflineRCD/BuildOfflineRCD';
+import UploadFile from '../components/UploadFile/UploadFile';
 //import SearchBarTest from '../components/SearchBar/SearchBarTest';
 export default function Home(){
   /*const [token,setToken] = useState()
@@ -29,6 +30,7 @@ export default function Home(){
         <Route path="/RCDFunc/:title" component={RCDFunc}/>
         <Route path="/onlyfortesting" component={OnlyforTesting}/>
         <Route path="/buildofflinercd" component={BuildOfflineRCD}/>
+        <Route path="/uploadfile" component={UploadFile}/>
       </Switch>
     </>
   )
