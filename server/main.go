@@ -34,7 +34,7 @@ func main() {
 	model.InitCreatePOP()
 	model.InitOfflineRCD()
 	defer model.DB.Close()
-
+	http.HandleFunc("/image/*", model.Uploadfile)
 	// 初始化Gin實例
 	router := gin.Default()
 	//sub router array
