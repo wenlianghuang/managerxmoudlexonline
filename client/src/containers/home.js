@@ -30,7 +30,7 @@ export default function Home(){
         <Route path="/RCDFunc/:title" component={RCDFunc}/>
         <Route path="/onlyfortesting" component={OnlyforTesting}/>
         <Route path="/buildofflinercd" component={BuildOfflineRCD}/>
-        <Route path="/uploadfile" component={UploadFile}/>
+        <Route path="/upload" component={UploadFile}/>
       </Switch>
     </>
   )
