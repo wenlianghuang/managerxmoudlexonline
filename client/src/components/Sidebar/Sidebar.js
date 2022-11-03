@@ -185,7 +185,7 @@ export default function Sidebar(){
             </List>
           </Collapse>
           <Divider style={{borderBottomWidth:0.5,background:"green"}}/>
-          <ListItemButton onClick={()=>history.push("/uploadfile")}>
+          <ListItemButton onClick={()=>history.push("/upload")}>
             <ListItemIcon>
               <Source />
             </ListItemIcon>
