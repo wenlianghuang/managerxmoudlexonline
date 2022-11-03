@@ -34,7 +34,7 @@ func main() {
 	model.InitCreatePOP()
 	model.InitOfflineRCD()
 	defer model.DB.Close()
-	http.HandleFunc("/image/*", model.Uploadfile)
+	http.HandleFunc("/upload", model.Uploadfile)
 	// 初始化Gin實例
 	router := gin.Default()
 	//sub router array
@@ -94,7 +94,7 @@ func main() {
 	//Gracefully shutdown by golang gin 2021.11.29
 	//原本是用router.Run()，要使用net/http套件的shutdown的話，需要使用原生的ListenAndServe
 	srv := &http.Server{
-		//Addr: "172.28.96.1:80"
+		//Addr: "172.28.96.1:80",
 		Addr:    ":5050",
 		Handler: router,
 	}
