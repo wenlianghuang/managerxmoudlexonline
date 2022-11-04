@@ -19,6 +19,7 @@ import (
 		"warnning-trigger/model"
 	*/
 
+	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 )
 
@@ -49,7 +50,8 @@ func main() {
 	//router.Use(static.Serve("/", static.LocalFile("../client/build", true)))
 	//router.Use(static.Serve("/dashboard", static.LocalFile("../client/build", true)))
 	//router.Use(static.Serve("/Inbox/test2", static.LocalFile("../client/build", true)))
-
+	router.Use(static.Serve("/", static.LocalFile("../client/build", true)))
+	router.Use(static.Serve("/upload", static.LocalFile("../client/build", true)))
 	v1 := router.Group("/apis/v1/")
 	{
 		v1.POST("/register", controller.RegisterUser)
@@ -94,8 +96,10 @@ func main() {
 	//Gracefully shutdown by golang gin 2021.11.29
 	//原本是用router.Run()，要使用net/http套件的shutdown的話，需要使用原生的ListenAndServe
 	srv := &http.Server{
+		//You can only use server with client/build togather => go run main.go
 		//Addr: "172.28.96.1:80",
-		Addr:    ":5050",
+		//Addr:    ":5050",
+		Addr:    "172.19.48.1:8090",
 		Handler: router,
 	}
 	//新增一個channel，type是os.Signal
