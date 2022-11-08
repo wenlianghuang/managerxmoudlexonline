@@ -1,13 +1,12 @@
 package model
 
 import (
-	"fmt"
-	"io/ioutil"
 	"net/http"
 )
 
 // 處理/upload 邏輯
 func Uploadfile(w http.ResponseWriter, r *http.Request) {
+
 	/*
 		fmt.Println("method:", r.Method) //取得請求的方法
 		if r.Method == "GET" {
@@ -36,30 +35,33 @@ func Uploadfile(w http.ResponseWriter, r *http.Request) {
 			io.Copy(f, file)
 		}
 	*/
-	fmt.Println("File Upload Endpoint Hit")
-	r.ParseMultipartForm(10)
-	file, handler, err := r.FormFile("myFile")
-	if err != nil {
-		fmt.Println("Error Retrieving the File")
-		fmt.Println(err)
-		return
-	}
 
-	defer file.Close()
-	fmt.Printf("Upload File %+v\n", handler.Filename)
-	fmt.Printf("File Size: %+v\n", handler.Size)
-	fmt.Printf("MIME Header: %+v\n", handler.Header)
+	/*
+		fmt.Println("File Upload Endpoint Hit")
+		r.ParseMultipartForm(10)
+		file, handler, err := r.FormFile("file")
+		if err != nil {
+			fmt.Println("Error Retrieving the File")
+			fmt.Println(err)
+			return
+		}
 
-	tempFile, err := ioutil.TempFile("D:/temp-image/", "upload-*.png")
-	if err != nil {
-		fmt.Println(err)
-	}
-	defer tempFile.Close()
+		defer file.Close()
+		fmt.Printf("Upload File %+v\n", handler.Filename)
+		fmt.Printf("File Size: %+v\n", handler.Size)
+		fmt.Printf("MIME Header: %+v\n", handler.Header)
 
-	fileBytes, err := ioutil.ReadAll(file)
-	if err != nil {
-		fmt.Println(err)
-	}
-	tempFile.Write(fileBytes)
-	fmt.Fprintf(w, "Successfully")
+		tempFile, err := ioutil.TempFile("D:/temp-image/", "upload-*.png")
+		if err != nil {
+			fmt.Println(err)
+		}
+		defer tempFile.Close()
+
+		fileBytes, err := ioutil.ReadAll(file)
+		if err != nil {
+			fmt.Println(err)
+		}
+		tempFile.Write(fileBytes)
+		fmt.Fprintf(w, "Successfully")
+	*/
 }
