@@ -35,7 +35,7 @@ func main() {
 	model.InitCreatePOP()
 	model.InitOfflineRCD()
 	defer model.DB.Close()
-	http.HandleFunc("/upload", model.Uploadfile)
+
 	// 初始化Gin實例
 	router := gin.Default()
 	//sub router array
@@ -47,11 +47,10 @@ func main() {
 	/*for i := 0; i < len(arraytest); i++ {
 		router.Use(static.Serve(arraytest[i], static.LocalFile("../client/build", true)))
 	}*/
-	//router.Use(static.Serve("/", static.LocalFile("../client/build", true)))
+	router.Use(static.Serve("/", static.LocalFile("../client/build", true)))
+	//router.Use(static.Serve("/upload", static.LocalFile("../client/build", true)))
 	//router.Use(static.Serve("/dashboard", static.LocalFile("../client/build", true)))
 	//router.Use(static.Serve("/Inbox/test2", static.LocalFile("../client/build", true)))
-	router.Use(static.Serve("/", static.LocalFile("../client/build", true)))
-	router.Use(static.Serve("/upload", static.LocalFile("../client/build", true)))
 	v1 := router.Group("/apis/v1/")
 	{
 		v1.POST("/register", controller.RegisterUser)
@@ -90,16 +89,34 @@ func main() {
 		offlinercdfunction.POST("", controller.OfflineRCDUser)
 	}
 
+	router.POST("/upload", model.Uploadfilegin)
+	/*
+		router.POST("/upload", func(c *gin.Context) {
+			router.MaxMultipartMemory = 8 << 20 // 8 MiB
+			router.Static("/assets", "./temp")
+			// single file
+			file, err := c.FormFile("selectedFile")
+			log.Println(file.Filename)
+			if err != nil {
+				fmt.Println("upload file error in server")
+				panic(err)
+			}
+			// Upload the file to specific dst.
+			c.SaveUploadedFile(file, "temp/"+file.Filename)
+			c.String(http.StatusOK, fmt.Sprintf("'%s' uploaded!", file.Filename))
+		})
+	*/
 	//注意，如果想要在另外台ip是內網的話，可以用 port 80取代
 	//router.Run(":5050")
 
 	//Gracefully shutdown by golang gin 2021.11.29
 	//原本是用router.Run()，要使用net/http套件的shutdown的話，需要使用原生的ListenAndServe
+
 	srv := &http.Server{
 		//You can only use server with client/build togather => go run main.go
 		//Addr: "172.28.96.1:80",
-		//Addr:    ":5050",
-		Addr:    "172.19.48.1:8090",
+		//Addr: ":5050",
+		Addr:    "192.168.100.9:8090",
 		Handler: router,
 	}
 	//新增一個channel，type是os.Signal
