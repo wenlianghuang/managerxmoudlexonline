@@ -116,7 +116,8 @@ func main() {
 		//You can only use server with client/build togather => go run main.go
 		//Addr: "172.28.96.1:80",
 		//Addr: ":5050",
-		Addr:    "192.168.100.9:8090",
+		//Addr:    "192.168.100.9:8090",
+		Addr:    "10.36.172.78:8080",
 		Handler: router,
 	}
 	//新增一個channel，type是os.Signal
