@@ -3,6 +3,7 @@ import axios from 'axios'
 
 export default function UploadFile(){
     const [selectedFile,setSelectedFile] = useState(null)
+    const [changeweb,setChangeWeb] = useState(true)
     //const formData = new FormData()
     //formData.append("selectedFile",selectedFile)
 
@@ -30,8 +31,8 @@ export default function UploadFile(){
             },
           }
           ).then((res)=>{
-            console.log("Success")
-            
+            console.log(res.data)
+            setChangeWeb(false)
             
           }).catch((error)=>{
             console.error("Failed: ",error)
