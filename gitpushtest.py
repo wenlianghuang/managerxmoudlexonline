@@ -19,7 +19,6 @@ if __name__ == "__main__":
     args = [ 
         'git',
         'push',
-        '-u',
         'origin',
         'main',
     ]
