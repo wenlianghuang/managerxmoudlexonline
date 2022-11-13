@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	sublogrus "mattbackend/Sublogrus"
 	"mattbackend/controller"
 	"mattbackend/middleware"
 	"mattbackend/model"
@@ -24,6 +25,16 @@ import (
 )
 
 func main() {
+
+	f, err := os.OpenFile("./Log/StartShutdown.log", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
+
+	if err != nil {
+		fmt.Println("Failed to create logfile" + "log.txt")
+		panic(err)
+	}
+	defer f.Close()
+	logStSh := sublogrus.Sublogrusfunc(f)
+	logStSh.Info("Start the server")
 	// 初始化db
 	dbErr := model.InitMySQLCon()
 	if dbErr != nil {
@@ -115,9 +126,9 @@ func main() {
 	srv := &http.Server{
 		//You can only use server with client/build togather => go run main.go
 		//Addr: "172.28.96.1:80",
-		//Addr: ":5050",
+		Addr: ":5050",
 		//Addr:    "192.168.100.9:8090",
-		Addr:    "10.36.172.78:8080",
+		//Addr:    "10.36.172.78:8080",
 		Handler: router,
 	}
 	//新增一個channel，type是os.Signal
@@ -154,5 +165,5 @@ func main() {
 		close(ch)
 	}
 	fmt.Println("Graceful Shutdown end ")
-
+	logStSh.Info("Close the server")
 }
